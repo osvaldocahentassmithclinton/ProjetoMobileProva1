@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Image, Button, ImageBackground, TextInput } from 'react-native';
+import { Text, View, ScrollView, StyleSheet, Image, Button, ImageBackground, TextInput } from 'react-native';
 import ImagemFundo from '../Imgs/gato.jpg';
 
 
