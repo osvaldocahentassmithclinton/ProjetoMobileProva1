@@ -6,7 +6,7 @@ import {useState} from 'react';
 
 
 
-export default function Sec4({navigation}) {
+export default function Counter({navigation}) {
     function aumentar() {
         setContador(contador + 1);
     }
@@ -18,6 +18,8 @@ export default function Sec4({navigation}) {
         }
     }
     const [contador, setContador] = useState(0);
+    const [nome, setNome] = useState(0);
+    const [email, setEmail] = useState(0);
     return (
         <View style={styles.container}>
             <ImageBackground style={{flex:1, width:'100%',height:'100%', padding: 40, justifyContent: 'space-around'}} source={ImagemFundo}>
@@ -32,9 +34,10 @@ export default function Sec4({navigation}) {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.inputers}>
-                    <TextInput placeholder='Nome' style={styles.input}></TextInput>
-                    <TextInput placeholder='Email' style={styles.input}></TextInput>
+                    <TextInput placeholder='Nome' style={styles.input} value={nome} onChangeText={setNome}></TextInput>
+                    <TextInput placeholder='Email' style={styles.input} value={email} onChangeText={setEmail}></TextInput>
                 </View>
+                <Text style={{backgroundColor: 'white'}}>Oi {nome} seu email é {email} e o número é {contador}</Text>
                 
             </ImageBackground>
         </View>

@@ -1,62 +1,56 @@
-import { Text, View, ScrollView, StyleSheet, Button, ImageBackground, TextInput, TouchableOpacity } from 'react-native';
-import ImagemFundo from '../Imgs/gato.jpg';
+import { Text, View, ScrollView, StyleSheet, Button, ImageBackground, TextInput } from 'react-native';
 import {useState} from 'react';
-import {signInWithEmailAndPassword} from "firebase/auth";
+import ImagemFundo from '../Imgs/gato.jpg';
+
+import {createUserWithEmailAndPassword} from "firebase/auth";
+
 import {auth} from "../controller.js";
 
+export default function Signin({navigation}) {
+    const [email,setEmail] = useState("");
+    const [senha,setSenha] = useState("");
 
-export default function Sec2({navigation}) {
-  const [email,setEmail] = useState("");
-  const [senha,setSenha] = useState("");
-
-  const VerificaUser = () => {
-    signInWithEmailAndPassword(auth, email, senha).then(userCredential => {
-      console.log("Usuário logado!",
-      userCredential.user.email);
-      navigation.navigate('HomeTab')
-    })
-    .catch((error) => {
-      console.log("Erro ao logar!", error.message);
-    });
-  }
+    const cadastroUser = () =>{
+        createUserWithEmailAndPassword(auth, email, senha).then((userCredential) => {
+            console.log('cadastrado!', userCredential.user.email);
+            navigation.navigate('Login');
+          })
+        .catch((error) => {
+          console.log('erro', error.message);
+        });
+    }
 
   return (
     <View style={styles.container}>
       <ImageBackground style={{flex:1, width:'100%',height:'100%', padding: 40, justifyContent: 'space-around'}} source={ImagemFundo}>
-        <Text style={[styles.title, styles.textCenter]}>ALICE IN WONDERLAND</Text>
+        <Text style={[styles.title, styles.textCenter]}>Sign In</Text>
         <Text style={[styles.text, styles.textCenter]}>Faça seu login abaixo!</Text>
 
         <TextInput
           style={styles.input}
           placeholder='Email'
-          value={email}
+          value = {email}
           onChangeText={setEmail}
-         
         />
         <TextInput
           style={styles.input}
           placeholder='Senha'
           secureTextEntry={true} // Para esconder a senha
-          value={senha}
+          value = {senha}
           onChangeText={setSenha}
         />
 
         {/* Alterado o <input> para <Button> */}
         <Button 
-          title="Logar" 
-          onPress={VerificaUser}
+          title="Cadastrar" 
           color="#00ff"
+          onPress={cadastroUser}
         />
         <Button 
-          title="Cadastro" 
-          onPress={() => navigation.navigate('Cadastro')}
+          title="Voltar ao login" 
+          onPress={() => navigation.navigate('Login')}
           color="#00ff"
         />
-        <TouchableOpacity 
-        onPress={() => navigation.navigate('Cadastro')}
-        style={styles.button}>
-          <Text style={styles.text}>Cadastrar-se</Text>
-        </TouchableOpacity>
       </ImageBackground>
     </View>
   );
@@ -90,12 +84,4 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     paddingLeft: 10,
   },
-  button: {
-    backgroundColor: '#00ff',
-    padding: 10,
-    borderRadius: 5,
-    marginTop: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
 });

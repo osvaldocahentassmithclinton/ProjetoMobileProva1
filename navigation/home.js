@@ -10,7 +10,6 @@ export default function Sec1() {
         <Text style={[styles.text, styles.textCenter]}>
           Já pensou como seria um jogo dark sobre algum conto de fada? Se sim, você se animará com o novo projeto "Alice in Wonderland" que estamos desenvolvendo. Se trata de um jogo de Alice no país das maravilhas em mundo que se fantasia de alegre para esconder uma verdade sombria.
         </Text>
-
         <View style={styles.imgContainerEvenly}>
           <Image 
             style={styles.img} 
