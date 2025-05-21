@@ -10,6 +10,8 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import { ProviderCart } from './components/ProviderCart';
+import Carrinho from './navigation/Carrinho.js';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 
@@ -50,7 +52,13 @@ function BottomTabs() {
               <MaterialCommunityIcons name="box" color={color} size={26} />
             ),
         }}/>
-        <BottomTab.Screen name="Adicioar Produto" component={addProduct} 
+        <BottomTab.Screen name="Adicionar Produto" component={addProduct} 
+          options={{ 
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="box" color={color} size={26} />
+            ),
+        }}/>
+        <BottomTab.Screen name="Carrinho" component={Carrinho} 
           options={{ 
             tabBarIcon: ({ color }) => (
               <MaterialCommunityIcons name="box" color={color} size={26} />
@@ -68,12 +76,14 @@ function BottomTabs() {
 export default function App() {
   const Stack = createStackNavigator();
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen options={{headerShown: false}} name='Login' component={Sec2}/>
-        <Stack.Screen options={{headerShown: false}} name='HomeTab' component={BottomTabs}/>
-        <Stack.Screen options={{headerShown: false}} name='Cadastro' component={Signin}/>
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ProviderCart>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen options={{headerShown: false}} name='Login' component={Sec2}/>
+          <Stack.Screen options={{headerShown: false}} name='HomeTab' component={BottomTabs}/>
+          <Stack.Screen options={{headerShown: false}} name='Cadastro' component={Signin}/>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ProviderCart>
   );
 }
