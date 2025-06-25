@@ -1,23 +1,16 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-import {getAuth} from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyB8xpG8r9E8Sr4it2OWHLxnCIO7ii_uaUU",
-  authDomain: "aulamobile2025.firebaseapp.com",
-  projectId: "aulamobile2025",
-  storageBucket: "aulamobile2025.firebasestorage.app",
-  messagingSenderId: "745457606355",
-  appId: "1:745457606355:web:57de6f207934c468b0fe26"
+  apiKey: "AIzaSyAfzgcdtzb1KxqtFfBRY0wo5fBGvisVJIE",
+  authDomain: "pegasus-ef67c.firebaseapp.com",
+  projectId: "pegasus-ef67c",
+  storageBucket: "pegasus-ef67c.firebasestorage.app",
+  messagingSenderId: "549008704577",
+  appId: "1:549008704577:web:4d02f9c1ccc4ce0d6e32c0"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
 export const auth = getAuth(app);
 export const db = getFirestore(app);

@@ -1,77 +1,121 @@
 import React from 'react';
-import Sec1 from "./navigation/home.js";
-import Sec2 from "./navigation/login.js";
-import Sec3 from "./navigation/feed.js";
-import Counter from "./navigation/counter.js";
-import Product from './navigation/Product.js';
-import Signin from './navigation/signin.js';
-import addProduct from './navigation/addProduct.js';
+import login from "./projeto/login.js";
+import SignIn from './projeto/signin.js';
+import Travels from './projeto/Travels.js';
+import cadastroViagens from './projeto/addTravels.js';
+import removerViagens from './projeto/removeTravels.js';
+import alterarViagens from './projeto/changeTravels.js';
+import AddAdmin from './projeto/addAdmin.js';
+import RemoveAdmin from './projeto/removeAdmin.js';
+import Agendamentos from './projeto/Agendamentos.js';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { ProviderCart } from './components/ProviderCart';
-import Carrinho from './navigation/Carrinho.js';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { ProviderCart } from './projeto/ProviderCart.js';
 
-
-function BottomTabs() {
+function BottomTabs({ isAdmin }) {
   const BottomTab = createBottomTabNavigator();
   return (
       <BottomTab.Navigator 
-        initialRouteName='Home'
+        initialRouteName='Home' 
         screenOptions={{ 
           headerStyle: {backgroundColor: 'black'},
           headerTintColor: 'cyan',
-          tabBarActiveTintColor: 'blue',
-          tabBarInactiveTintColor: '#000000',
-          tabBarActiveBackgroundColor: 'black',
-          tabBarInactiveBackgroundColor: '#050545',
+          
+          tabBarActiveTintColor: '#FFFFFF', 
+          tabBarInactiveTintColor: '#BBBBBB', 
+          tabBarActiveBackgroundColor: '#008080', 
+          tabBarInactiveBackgroundColor: '#282828', 
+          tabBarStyle: { 
+            backgroundColor: '#282828', 
+            borderTopColor: '#3A3A3A', 
+            borderTopWidth: 1,
+          },
+
+          headerShown: false,
         }}>
-        <BottomTab.Screen name="Home" component={Sec1} 
+        <BottomTab.Screen name="Home" component={() => <Travels isAdmin={isAdmin} />}
           options={{ 
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="heart" color={color} size={26} />
+              <MaterialCommunityIcons name="plane" color={color} size={26} />
             ),
         }}/>
-        <BottomTab.Screen name="Feed" component={Sec3} 
+        <BottomTab.Screen name="Agendamentos" component={Agendamentos}
           options={{ 
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="card" color={color} size={26} />
-            ),
-        }}/>
-        <BottomTab.Screen name="Counter" component={Counter} 
-          options={{ 
-            tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="calculator" color={color} size={26} />
-            ),
-        }}/>
-        <BottomTab.Screen name="Product" component={Product} 
-          options={{ 
-            tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="box" color={color} size={26} />
-            ),
-        }}/>
-        <BottomTab.Screen name="Adicionar Produto" component={addProduct} 
-          options={{ 
-            tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="box" color={color} size={26} />
-            ),
-        }}/>
-        <BottomTab.Screen name="Carrinho" component={Carrinho} 
-          options={{ 
-            tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="box" color={color} size={26} />
+              <MaterialCommunityIcons name="calendar-check" color={color} size={26} />
             ),
         }}/>
       </BottomTab.Navigator>
- 
   );
 }
 
+function ADM() {
+  const BottomTab = createBottomTabNavigator();
+  return (
+      <BottomTab.Navigator 
+        initialRouteName='Travels'
+        screenOptions={{ 
+          headerStyle: {backgroundColor: 'black'},
+          headerTintColor: 'cyan',
+          
+          
+          tabBarActiveTintColor: '#FFFFFF', 
+          tabBarInactiveTintColor: '#BBBBBB', 
+          tabBarActiveBackgroundColor: '#008080', 
+          tabBarInactiveBackgroundColor: '#282828', 
+          tabBarStyle: { 
+            backgroundColor: '#282828', 
+            borderTopColor: '#3A3A3A', 
+            borderTopWidth: 1,
+          },
 
-
-
+          headerShown: false,
+        }}>
+        <BottomTab.Screen name="Travels" component={() => <Travels isAdmin={true} />}
+          options={{ 
+            tabBarIcon: ({ color }) => (
+              <FontAwesome name="plane" size={26} color={color} />
+            ),
+        }}/>
+        <BottomTab.Screen name="AddTravels" component={cadastroViagens} 
+          options={{ 
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="airplane-plus" size={26} color={color} />
+            ),
+        }}/>
+        <BottomTab.Screen name="RemoveTravels" component={removerViagens} 
+          options={{ 
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="airplane-remove" size={26} color={color} />
+            ),
+        }}/>
+        <BottomTab.Screen name="ChangeTravels" component={alterarViagens} 
+          options={{ 
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="reload" color={color} size={26} />
+            ),
+        }}/>
+        <BottomTab.Screen name="AddAdmin" component={AddAdmin}
+          options={{ 
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="account-plus" color={color} size={26} />
+            ),
+          }}
+        />
+        <BottomTab.Screen name="RemoveAdmin" component={RemoveAdmin}
+          options={{ 
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="account-remove" color={color} size={26} />
+            ),
+          }}
+        />
+      </BottomTab.Navigator>
+  );
+}
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -79,9 +123,10 @@ export default function App() {
     <ProviderCart>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen options={{headerShown: false}} name='Login' component={Sec2}/>
-          <Stack.Screen options={{headerShown: false}} name='HomeTab' component={BottomTabs}/>
-          <Stack.Screen options={{headerShown: false}} name='Cadastro' component={Signin}/>
+          <Stack.Screen options={{headerShown: false}} name='Login' component={login}/>
+          <Stack.Screen options={{headerShown: false}} name='HomeTab' component={() => <BottomTabs isAdmin={false} />}/>
+          <Stack.Screen options={{headerShown: false}} name='AdminDashboard' component={ADM}/>
+          <Stack.Screen options={{headerShown: false}} name='Cadastro' component={SignIn}/>
         </Stack.Navigator>
       </NavigationContainer>
     </ProviderCart>
